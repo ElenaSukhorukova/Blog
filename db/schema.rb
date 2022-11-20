@@ -10,9 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_20_092625) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_20_103832) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "articles", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "author_article_id"
+    t.index ["author_article_id"], name: "index_articles_on_author_article_id"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.text "body"
+    t.string "status"
+    t.string "commentabable_type"
+    t.bigint "commentabable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "author_comment_id"
+    t.index ["author_comment_id"], name: "index_comments_on_author_comment_id"
+    t.index ["commentabable_type", "commentabable_id"], name: "index_comments_on_commentabable"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "username"
@@ -27,4 +49,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_20_092625) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "articles", "users", column: "author_article_id"
+  add_foreign_key "comments", "users", column: "author_comment_id"
 end
