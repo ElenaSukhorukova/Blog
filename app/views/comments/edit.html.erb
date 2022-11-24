@@ -1,0 +1,3 @@
+<h1><%= t('pages.edit', model: comment_model_name.downcase) %></h1>
+
+<%= render partial: 'form', locals: { comment: @comment, method: :put, url: comment_path(@comment), submit: t('button.edit') } %>
