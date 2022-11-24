@@ -50,6 +50,7 @@ gem "bootsnap", require: false
 
 gem 'rails-i18n', '~> 7.0.0'
 gem 'devise'
+gem 'devise-i18n'
 gem 'simple_form'
 gem 'bootstrap', '~> 5.1.3'
 
