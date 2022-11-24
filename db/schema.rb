@@ -20,20 +20,20 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_20_103832) do
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "author_article_id"
-    t.index ["author_article_id"], name: "index_articles_on_author_article_id"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_articles_on_user_id"
   end
 
   create_table "comments", force: :cascade do |t|
     t.text "body"
     t.string "status"
-    t.string "commentabable_type"
-    t.bigint "commentabable_id"
+    t.string "commentable_type"
+    t.bigint "commentable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "author_comment_id"
-    t.index ["author_comment_id"], name: "index_comments_on_author_comment_id"
-    t.index ["commentabable_type", "commentabable_id"], name: "index_comments_on_commentabable"
+    t.bigint "user_id"
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -45,10 +45,21 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_20_103832) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "invitation_token"
+    t.datetime "invitation_created_at"
+    t.datetime "invitation_sent_at"
+    t.datetime "invitation_accepted_at"
+    t.integer "invitation_limit"
+    t.string "invited_by_type"
+    t.bigint "invited_by_id"
+    t.integer "invitations_count", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
+    t.index ["invited_by_id"], name: "index_users_on_invited_by_id"
+    t.index ["invited_by_type", "invited_by_id"], name: "index_users_on_invited_by"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "articles", "users", column: "author_article_id"
-  add_foreign_key "comments", "users", column: "author_comment_id"
+  add_foreign_key "articles", "users"
+  add_foreign_key "comments", "users"
 end
