@@ -1,16 +1,24 @@
 Rails.application.routes.draw do
   devise_for :users
 
+  devise_scope :user do  
+    get 'sign_in', to: 'devise/sessions#new'
+    get 'sign_up', to: 'devise/registrations#new'
+    get 'sign_out', to: 'devise/sessions#destroy'
+  end
+
   get 'static_pages/about'
   get 'static_pages/contacts'
-  root to: 'article#index'
+  root to: 'articles#index'
  
   shallow do
     resources :users do
-      resource :artciles
+      resources :articles
     end
     resources :articles do
-      resource :comments
+      resources :comments
     end
   end
+
+  resources :articles, only: %i[index]
 end
