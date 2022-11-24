@@ -1,0 +1,18 @@
+<h1><%= article_model_name.pluralize %></h1>
+
+<% if @articles.try(:any?) %>
+  <% @articles.each do |article| %>
+  <h2><%= article.title %></h2>
+      <p><%= article.user.username %></p>
+    <p>
+      <%= article.content %>
+      <time datetime="<%= article.formatted_created_at %>">
+        <%= article.formatted_created_at %>
+      </time>
+    </p>
+    <%= link_to t('link.show', model: article_model_name), article_path(article) %>
+    <%= link_to t('link.edit', model: article_model_name.downcase), edit_article_path(article) %>
+    <%= button_to t('button.destroy', model: article_model_name.downcase), article_path(article), 
+      method: :delete, class: "btn btn-light", :onclick => "return confirm('Are you sure?')", :remote => true %>  
+  <% end %>
+<% end %>

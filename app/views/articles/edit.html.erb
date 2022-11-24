@@ -1,0 +1,3 @@
+<h1><%= t('pages.edit', model: article_model_name.downcase) %></h1>
+
+<%= render partial: 'form', locals: { article: @article, method: :put, url: article_path(@article), submit: t('button.edit') } %>

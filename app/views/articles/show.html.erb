@@ -1,0 +1,21 @@
+<h1><%= @article.title%></h1>
+<p><%= @article.user.username %></p>
+<p>
+  <%= @article.content %>
+  <time datetime="<%= @article.formatted_created_at %>">
+    <%= @article.formatted_created_at %>
+  </time>
+</p>
+
+<% if @comments.try(:any?) %>
+  <% @comments.each do |comment| %>
+    <%= comment.user.username %>
+    <%= comment.body %>
+    
+    <%= link_to t('link.edit', model: comment_model_name.downcase), edit_comment_path(comment) %>
+    <%= button_to t('button.destroy', model: comment_model_name.downcase), comment_path(comment), 
+      method: :delete, class: "btn btn-light", :onclick => "return confirm('Are you sure?')", :remote => true %>  
+  <% end %>
+<% end %>
+
+<%= render partial: 'comments/form', locals: { comment: @comment, method: :post, url: article_comments_path(@article), submit: t('button.new') } %>

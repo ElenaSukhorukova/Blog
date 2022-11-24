@@ -1,0 +1,3 @@
+<h1><%= t('pages.new', model: article_model_name.downcase) %></h1>
+
+<%= render partial: 'form', locals: { article: @article, method: :post, url: user_articles_path(@user), submit: t('button.new') } %>

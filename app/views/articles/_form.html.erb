@@ -1,0 +1,7 @@
+<%= simple_form_for article, method: method, url: url do |f| %>
+  <%= f.input :title, required: true, minlength: 2, placeholder: Article.human_attribute_name("title")  %>
+  <%= f.input :content, required: true, minlength: 2, placeholder: Article.human_attribute_name("content") %>
+  <%= f.select :status, Article::VALID_STATUES.collect{|status| status }, 
+    { selected: Article::VALID_STATUES[0], class: "form-select form-select-sm" } %>
+  <%= f.button :submit, submit, class: "btn btn-light" %> 
+<% end %>
