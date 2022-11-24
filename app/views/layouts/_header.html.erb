@@ -1,0 +1,20 @@
+<header>
+  <nav>
+    <ul>
+      <li><%= link_to t('pages.about'), static_pages_about_path %>
+      <li><%= link_to article_model_name.pluralize, articles_path %>
+      <% unless user_signed_in? %>
+        <li><%= link_to t('nav.sign_in'), sign_in_url, class: "navbar-brand text-dark text-decoration-none text-end"  %></li>
+        <li><%= link_to t('nav.sign_up'), sign_up_path, class: "navbar-brand text-dark text-decoration-none text-end" %></li>
+      <% else %>
+        <li><%= link_to t('link.new', model: article_model_name.downcase), new_user_article_path(current_user) %>
+        <li><%= link_to t('pages.contact'), static_pages_contacts_path %>
+        <li>
+          <%= link_to "Sign out", destroy_user_session_path, 
+          'data- turbo_method': :delete, :onclick => "return confirm('Are you sure?')", 
+          :remote => true, class: "me-3 py-2 text-dark text-decoration-none" %>
+        </li>
+      <% end %>
+    </ul>
+  </nav>
+</header>
