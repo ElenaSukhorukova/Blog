@@ -1,2 +1,28 @@
-<h1>StaticPages#contacts</h1>
-<p>Find me in app/views/static_pages/contacts.html.erb</p>
+ <h1 class='md-2'><%= t('pages.contacts.contacts') %></h1>
+<container class='card px-2'>
+  <div class='card-body' itemscope itemtype="http://schema.org/Organization">   
+    <p class='bold fs-5'><span itemprop="name"><%= t('pages.site_name') %></span></p>
+    <div class='card-text' itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+      <p>
+        <span class='bold'><%= t('pages.contacts.address.attr_address') %></span> 
+        <span itemprop="streetAddress"><%= t('pages.contacts.address.address') %></span>
+      </p>
+      <p>
+        <span class='bold'><%= t('pages.contacts.address.attr_post_code') %></span> 
+        <span itemprop="postalCode"><%= t('pages.contacts.address.post_code') %></span>
+      </p>
+      <p>
+        <span class='bold'><%= t('pages.contacts.address.attr_city') %></span> 
+        <span itemprop="addressLocality"><%= t('pages.contacts.address.city') %></span>
+      </p>
+    </div>
+    <p>
+      <span class='bold'><%= t('pages.contacts.address.attr_phone') %></span> 
+      <span itemprop="telephone"><%= t('pages.contacts.address.phone') %></span>
+    </p>
+    <p>
+      <span class='bold'><%= t('pages.contacts.address.attr_email') %></span> 
+      <span itemprop="email"><%= t('pages.contacts.address.email') %></span>
+    </p>
+  </div>
+</section>
