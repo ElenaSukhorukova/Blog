@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   helper_method :comment_model_name
   helper_method :article_model_name
 
+  add_flash_types :info, :danger, :warning, :success, :alert, :notice
+
   protected
 
   def configure_permitted_parameters
