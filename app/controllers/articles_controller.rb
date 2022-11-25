@@ -1,15 +1,15 @@
 class ArticlesController < ApplicationController
-  before_action :authenticate_user!, except: %i[index]
+  before_action :authenticate_user!, except: %i[index show]
   before_action :define_user, only: %i[new create]
   before_action :define_article, except: %i[new create index]
 
-
   def index
     if user_signed_in?
-      @articles = Article.all.where.not(status: Article::VALID_STATUES[2]).order(created_at: :desc) 
+      @articles = Article.where.not(status: Article::VALID_STATUES[2]).order(created_at: :desc) 
     else
-      @articles = Article.all.where(status: Article::VALID_STATUES[0]).order(created_at: :desc)
+      @articles = Article.where(status: Article::VALID_STATUES[0]).order(created_at: :desc)
     end
+    @archaved_articles = Article.where(status: Article::VALID_STATUES[1]).order(created_at: :desc)
   end
 
   def show
@@ -30,7 +30,8 @@ class ArticlesController < ApplicationController
     @article = @user.articles.build(article_params)
 
     if @article.save
-      redirect_to articles_path, success: I18n.t('flash.new', model: article_model_name.downcase)
+      redirect_to articles_path, 
+        success: I18n.t('flash.new', model: article_model_name.downcase)
     else
       render :new, status: :unprocessable_entity
     end
@@ -41,7 +42,8 @@ class ArticlesController < ApplicationController
 
   def update
     if @article.update(article_params)
-      redirect_to articles_path, success: I18n.t('flash.update', model: article_model_name.downcase)
+      redirect_to article_path(@article), 
+        success: I18n.t('flash.update', model: article_model_name.downcase)
     else
       render :edit, status: :unprocessable_entity
     end
@@ -49,7 +51,8 @@ class ArticlesController < ApplicationController
 
   def destroy
     if @article.destroy
-      redirect_to articles_path, success: I18n.t('flash.destroy', model: article_model_name.downcase)
+      redirect_to articles_path, 
+        success: I18n.t('flash.destroy', model: article_model_name.downcase)
     end
   end
 
