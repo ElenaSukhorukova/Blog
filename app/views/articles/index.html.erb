@@ -1,18 +1,38 @@
-<h1><%= article_model_name.pluralize %></h1>
+<h1 class='md-4'><%= article_model_name.pluralize %></h1>
+
+<%= link_to t('link.new', model: article_model_name), new_user_article_path(current_user), 
+  class: 'btn btn-outline-info me-2 mt-3' if current_user%>
 
 <% if @articles.try(:any?) %>
   <% @articles.each do |article| %>
-  <h2><%= article.title %></h2>
-      <p><%= article.user.username %></p>
-    <p>
-      <%= article.content %>
-      <time datetime="<%= article.formatted_created_at %>">
-        <%= article.formatted_created_at %>
-      </time>
-    </p>
-    <%= link_to t('link.show', model: article_model_name), article_path(article) %>
-    <%= link_to t('link.edit', model: article_model_name.downcase), edit_article_path(article) %>
-    <%= button_to t('button.destroy', model: article_model_name.downcase), article_path(article), 
-      method: :delete, class: "btn btn-light", :onclick => "return confirm('Are you sure?')", :remote => true %>  
+    <article class='mt-5'>
+      <div class='container'>
+        <h3><%= article.title %></h2>
+        <section>
+          <p class='my-2'>
+            <i><%= attribute_model(article, :user) %>:</i> 
+            <span class='bold'>
+              <%= article.user.username.split(' ').map(&:capitalize!).join(' ') %>
+            </span>
+          </p>
+          <p class='my-2'>
+            <%= article.content %>
+          </p>
+          <span class='style-date'>
+            <time datetime="<%= article.formatted_created_at %>">
+              <%= article.formatted_created_at %>
+            </time>
+          </span>
+        </section>
+        <div class="btn-group mt-2" role="group">
+          <%= link_to t('link.show', model: article_model_name.downcase), article_path(article), class: 'btn btn-outline-primary me-2' %>
+          <% if user_signed_in? && article.user == current_user %>
+            <%= link_to t('link.edit', model: article_model_name.downcase), edit_article_path(article), class: 'btn btn-outline-success me-2' %>
+            <%= button_to t('button.destroy', model: article_model_name.downcase), article_path(article), 
+              method: :delete, class: "btn btn-outline-danger", :onclick => "return confirm('Are you sure?')", :remote => true %>
+          <% end %>
+        </div>
+      </div>
+    </article>
   <% end %>
 <% end %>

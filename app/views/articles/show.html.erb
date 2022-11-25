@@ -1,21 +1,57 @@
-<h1><%= @article.title%></h1>
-<p><%= @article.user.username %></p>
-<p>
-  <%= @article.content %>
-  <time datetime="<%= @article.formatted_created_at %>">
-    <%= @article.formatted_created_at %>
-  </time>
-</p>
-
-<% if @comments.try(:any?) %>
-  <% @comments.each do |comment| %>
-    <%= comment.user.username %>
-    <%= comment.body %>
-    
-    <%= link_to t('link.edit', model: comment_model_name.downcase), edit_comment_path(comment) %>
-    <%= button_to t('button.destroy', model: comment_model_name.downcase), comment_path(comment), 
-      method: :delete, class: "btn btn-light", :onclick => "return confirm('Are you sure?')", :remote => true %>  
-  <% end %>
-<% end %>
-
-<%= render partial: 'comments/form', locals: { comment: @comment, method: :post, url: article_comments_path(@article), submit: t('button.new') } %>
+<article class='mt-2'>
+  <div class='container'>
+    <%= link_to sanitize(t('button.go_back')), articles_path, class: "btn btn-outline-dark mb-4", role: 'button' %>
+    <h1 class='md-4'><%= @article.title %></h1>
+    <section>
+      <p class='my-2'>
+        <i><%= attribute_model(@article, :user) %> </i> 
+        <span class='bold'>
+          <%= @article.user.username.split(' ').map(&:capitalize!).join(' ') %>
+        </span>
+      </p>
+      <p>
+        <%= @article.content %>
+      </p>
+      <span class='style-date'>
+        <time datetime="<%= @article.formatted_created_at %>">
+          <%= @article.formatted_created_at %>
+        </time>
+      <span>
+    </section>
+    <div class="btn-group mt-2" role="group">
+      <% if user_signed_in? && @article.user == current_user %>
+        <%= link_to t('link.edit', model: article_model_name.downcase), edit_article_path(@article), class: 'btn btn-outline-success me-2' %>
+        <%= button_to t('button.destroy', model: article_model_name.downcase), article_path(@article), 
+          method: :delete, class: "btn btn-outline-danger", :onclick => "return confirm('Are you sure?')", :remote => true %>
+      <% end %>
+    </div>
+    <section>
+      <% if @comments.try(:any?) %>
+        <h3 class='md-4 mt-5'><%= comment_model_name.pluralize %></h3>
+        <% @comments.each do |comment| %>
+          <section>
+            <i><%= attribute_model(@comment, :user) %></i> 
+            <span class='bold'>
+              <%= comment.user.username.split(' ').map(&:capitalize!).join(' ') %>
+            </span>
+            <p><%= comment.body %></*p>
+            
+            <% if user_signed_in? && comment.user == current_user %>
+              <div class="btn-group mt-2" role="group">
+                <%= link_to t('link.edit', model: comment_model_name.downcase), edit_comment_path(comment), class: 'btn btn-outline-success me-2' %>
+                <%= button_to t('button.destroy', model: comment_model_name.downcase), comment_path(comment), 
+                  method: :delete, class: 'btn btn-outline-danger me-2', :onclick => "return confirm('Are you sure?')", :remote => true %>
+              </div>
+            <% end %>
+          </section>
+        <% end %>
+      <% end %>
+      <% if user_signed_in? %>
+        <div class='col-sm-5 mt-5'>
+          <%= render partial: 'comments/form', locals: { comment: @comment, method: :post, 
+            url: article_comments_path(@article), submit: t('button.new') } %>
+        </div>
+      <% end %>
+    </section>
+  </div>
+</article>
