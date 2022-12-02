@@ -10,7 +10,9 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "custom", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <%= javascript_include_tag "custom_application", "data-turbo-track": "reload", defer: true %>
   </head>
 
   <body>
@@ -31,7 +33,7 @@
         <%= yield %>
 
       </main>
-          <%= render 'layouts/footer' %>
+        <%= render 'layouts/footer' %>
     </div>
   </body>
 </html>
