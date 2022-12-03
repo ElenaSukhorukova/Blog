@@ -14,7 +14,10 @@ en:
       article:
         title: 'Title'
         content: 'Content'
-        user: 'Author of the article'
+        user: 'Author'
+      comment:
+        body: 'Comment'
+        user: 'Author'
       user:
         username: 'User name'
         confirmation_sent_at: 'Confirmation sent at'
@@ -40,10 +43,7 @@ en:
         unconfirmed_email: 'Unconfirmed email'
         unlock_token: 'Unlock token'
         updated_at: 'Updated at'
-      comment:
-        body: 'Comment'
-        user: 'Author of the comment'
-  pages:
+  page:
     site_name: 'Blog'
     new: 'A new %{model}'
     edit: 'The edit %{model}'
