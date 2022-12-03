@@ -1,0 +1,43 @@
+<%= provide :main_menu do %>
+  <header>
+    <nav class="navbar navbar-expand-lg bg-info">
+      <div class="container ps-5">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mb-2 mb-lg-0">
+            <li class="nav-item">
+              <%= nav_tab t('page.site_name'), root_path, 
+                class: "nav-brand badge fs-2 px-4", current_page: current_page %>
+            </li>      
+            <li class="nav-item">
+              <%= nav_tab t('page.about'), static_pages_about_path, 
+                class: "nav-link badge fs-5 px-4 mt-2", current_page: current_page %>
+            </li>
+            <li class="nav-item">
+              <%= nav_tab t('link.contact'), static_pages_contacts_path, 
+                class: "nav-link badge fs-5 px-4 mt-2", current_page: current_page %>
+            </li>
+            <% if user_signed_in? %>
+              <li class="nav-item">
+                <%= nav_tab t('link.new', model: i18n_model_name(Article.new).downcase), new_user_article_path(current_user), 
+                  class: "nav-link badge fs-5 px-4 mt-2", current_page: current_page %></li>
+              <li class="nav-item">
+                <%= nav_tab t('nav.sign_out'), sign_out_path, 'data- turbo_method': :delete, 
+                  :onclick => "return confirm('Are you sure?')", :remote => true, 
+                  class: "nav-link badge fs-5 px-4 mt-2", current_page: current_page  %>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <%= nav_tab t('nav.sign_in'), sign_in_url, 
+                  class: "nav-link badge fs-5 px-4 mt-2", current_page: current_page %>
+              </li>
+              <li class="nav-item">
+                <%= nav_tab t('nav.sign_up'), sign_up_path, 
+                  class: "nav-link badge fs-5 px-4 mt-2", current_page: current_page %>
+              </li>           
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+<% end %>
