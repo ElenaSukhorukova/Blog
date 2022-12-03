@@ -1,4 +1,7 @@
 <article class='mt-2'>
-  <h1 class='md-4 mb-4'><%= t('pages.about_title') %></h1>
-  <p><%= t('pages.about_content') %></p>
+  <% provide :page_title, t('page.about_title') %>
+  <% currently_at t('page.about') %>
+
+  <h1 class='md-4 mb-4'><%= t('page.about_title') %></h1>
+  <p><%= t('page.about_content') %></p>
 </article>
