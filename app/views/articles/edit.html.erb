@@ -1,8 +1,8 @@
 <section>
-  <% provide :page_title, t('pages.edit', model: i18n_model_name(@article).downcase) %>
+  <% provide :page_title, t('page.edit', model: i18n_model_name(@article).downcase) %>
   <% currently_at %>
 
-  <h1 class='md-4'><%= t('pages.edit', model: i18n_model_name(@article).downcase) %></h1>
+  <h1 class='md-4'><%= t('page.edit', model: i18n_model_name(@article).downcase) %></h1>
   <div class='col-sm-5'>
     <%= render partial: 'form', locals: { model: @article, method: :put, submit: t('button.edit') } %>
   </div>
