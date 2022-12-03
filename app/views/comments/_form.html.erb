@@ -1,7 +1,8 @@
-<%= simple_form_for comment, method: method, url: url do |f| %>
-  <%= f.input :body, required: true, maxlength: 4000, placeholder: Comment.human_attribute_name("body"), input_html: { class: 'mb-2' }  %>
+<%= simple_form_for model, method: method do |f| %>
+  <%= f.input :body, required: true, maxlength: 4000, 
+    placeholder: attribute_model(f.object, :body), input_html: { class: 'mb-2' }  %>
   <%= f.input :status, collection: Comment::VALID_STATUES, as: :select, 
     selected: Comment::VALID_STATUES[0] %>
   <%= f.button :submit, submit, class: "btn btn-primary mt-2 mb-2" %>
-  <%= link_to t("submit.cancel"), article_path(f.object.commentable_id), class: "btn btn-primary" if f.object.persisted? %>
+  <%= render partial: 'shared/cancel_button', locals: { path: commentable_path(f.object) } if f.object.persisted? %>
 <% end %>
