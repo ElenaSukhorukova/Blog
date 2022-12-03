@@ -1,4 +1,11 @@
-<h1 class='md-4'><%= t('pages.new', model: article_model_name.downcase) %></h1>
-<div class='col-sm-5'>
-  <%= render partial: 'form', locals: { article: @article, method: :post, url: user_articles_path(@user), submit: t('button.new') } %>
-</div>
+<section>
+  <% provide :page_title, t('pages.new', model: i18n_model_name(@article).downcase)%>
+  <% currently_at t('link.new', model: i18n_model_name(@article).downcase) %>
+  <%= render partial: 'shared/go_back_button', locals: { path: articles_path } %>
+
+  <h1 class='md-4'><%= t('pages.new', model: i18n_model_name(@article).downcase) %></h1>
+  <div class='col-sm-5'>
+    <%= render partial: 'form', locals: { model: [@user, @article], method: :post, 
+      submit: t('button.new') } %>
+  </div>
+</section>

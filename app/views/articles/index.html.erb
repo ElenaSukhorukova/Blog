@@ -1,38 +1,46 @@
-<h1 class='md-4'><%= article_model_name.pluralize %></h1>
+<section>
+  <% provide :page_title, i18n_model_name(@articles, count: 2) %>
+  <% currently_at t('page.site_name') %>
 
-<%= link_to t('link.new', model: article_model_name), new_user_article_path(current_user), 
-  class: 'btn btn-outline-info me-2 mt-3' if current_user%>
+  <h1 class='md-4'><%= i18n_model_name(@articles, count: 2) %></h1>
 
-<% if @articles.try(:any?) %>
-  <% @articles.each do |article| %>
-    <article class='mt-5'>
-      <div class='container'>
-        <h3><%= article.title %></h2>
-        <section>
-          <p class='my-2'>
-            <i><%= attribute_model(article, :user) %>:</i> 
-            <span class='bold'>
-              <%= article.user.username.split(' ').map(&:capitalize!).join(' ') %>
+  <p>
+    <%= link_to t('link.new', model: i18n_model_name(@articles).downcase), 
+      new_user_article_path(current_user), class: 'btn btn-outline-info me-2 mt-3' if current_user%>
+  </p>
+  <% if @articles.try(:any?) %>
+    <% @articles.each do |article| %>
+      <article class='mt-5'>
+        <div class='container'>
+          <h3><%= article.title %></h2>
+          <section>
+            <p class='my-2'>
+              <i><%= attribute_model(article, :user) %>:</i> 
+              <span class='bold'>
+                <%= article.user.username.split(' ').map(&:capitalize!).join(' ') %>
+              </span>
+            </p>
+            <p class='my-2'>
+              <%= article.content %>
+            </p>
+            <span class='style-date'>
+              <time datetime="<%= article.formatted_created_at %>">
+                <%= article.formatted_created_at %>
+              </time>
             </span>
-          </p>
-          <p class='my-2'>
-            <%= article.content %>
-          </p>
-          <span class='style-date'>
-            <time datetime="<%= article.formatted_created_at %>">
-              <%= article.formatted_created_at %>
-            </time>
-          </span>
-        </section>
-        <div class="btn-group mt-2" role="group">
-          <%= link_to t('link.show', model: article_model_name.downcase), article_path(article), class: 'btn btn-outline-primary me-2' %>
-          <% if user_signed_in? && article.user == current_user %>
-            <%= link_to t('link.edit', model: article_model_name.downcase), edit_article_path(article), class: 'btn btn-outline-success me-2' %>
-            <%= button_to t('button.destroy', model: article_model_name.downcase), article_path(article), 
-              method: :delete, class: "btn btn-outline-danger", :onclick => "return confirm('Are you sure?')", :remote => true %>
-          <% end %>
+          </section>
+          <div class="btn-group mt-2" role="group">
+            <%= link_to t('link.show', model: i18n_model_name(article).downcase), 
+              article_path(article), class: 'btn btn-outline-primary me-2' %>
+            <% if user_signed_in? && article.user == current_user %>
+              <%= link_to t('link.edit', model: i18n_model_name(article).downcase), 
+                edit_article_path(article), class: 'btn btn-outline-success me-2' %>
+              <%= button_to t('button.destroy', model: i18n_model_name(article).downcase), article_path(article), 
+                method: :delete, class: "btn btn-outline-danger", :onclick => "return confirm('Are you sure?')", :remote => true %>
+            <% end %>
+          </div>
         </div>
-      </div>
-    </article>
+      </article>
+    <% end %>
   <% end %>
-<% end %>
+</section>

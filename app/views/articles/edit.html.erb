@@ -1,4 +1,9 @@
-<h1 class='md-4'><%= t('pages.edit', model: article_model_name.downcase) %></h1>
-<div class='col-sm-5'>
-  <%= render partial: 'form', locals: { article: @article, method: :put, url: article_path(@article), submit: t('button.edit') } %>
-</div>
+<section>
+  <% provide :page_title, t('pages.edit', model: i18n_model_name(@article).downcase) %>
+  <% currently_at %>
+
+  <h1 class='md-4'><%= t('pages.edit', model: i18n_model_name(@article).downcase) %></h1>
+  <div class='col-sm-5'>
+    <%= render partial: 'form', locals: { model: @article, method: :put, submit: t('button.edit') } %>
+  </div>
+</section>

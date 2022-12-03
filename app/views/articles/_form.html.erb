@@ -1,10 +1,12 @@
-<%= simple_form_for article, method: method, url: url do |f| %>
-  <%= f.input :title, required: true, minlength: 2, placeholder: Article.human_attribute_name("title"), input_html: { class: 'mb-2' } %>
-  <%= f.input :content, required: true, minlength: 2, placeholder: Article.human_attribute_name("content"), input_html: { class: 'mb-2' } %>
+<%= simple_form_for model, method: method do |f| %>
+  <%= f.input :title, required: true, minlength: 2, 
+    placeholder: attribute_model(f.object, :title), input_html: { class: 'mb-2' } %>
+  <%= f.input :content, required: true, minlength: 2, 
+    placeholder: attribute_model(f.object, :content), input_html: { class: 'mb-2' } %>
   <%= f.input :status, collection: Article::VALID_STATUES, as: :select, 
     selected: Article::VALID_STATUES[0], input_html: { class: 'px-2' } %>
   <div class="mt-2 mb-2">
     <%= f.button :submit, submit, class: "btn btn-primary" %>
-    <%= link_to t("submit.cancel"), article_path(f.object), class: "btn btn-primary" if f.object.persisted? %>
+    <%= render partial: 'shared/cancel_button', locals: { path: article_path(f.object) } if f.object.persisted? %>	
   </div>
 <% end %>
