@@ -1,4 +1,6 @@
 module ApplicationHelper
+  include Pagy::Frontend
+
   def i18n_model_name(model, count: 1)
     model.model_name.human(count: count)
   end
@@ -18,7 +20,7 @@ module ApplicationHelper
 
   def nav_tab(title, url, options = {})
     current_page = options.delete :current_page
-    css_text = current_page == title ? 'text-success' : 'text-white'
+    css_text = current_page == title ? 'text-beige' : 'text-white'
     options[:class] = options[:class] ? (options[:class] + ' ' + css_text) : 
                                         css_text
     
