@@ -5,20 +5,19 @@ class ArticlesController < ApplicationController
 
   def index
     if user_signed_in?
-      @articles = Article.where.not(status: Article::VALID_STATUES[2]).order(created_at: :desc) 
+      @pagy, @articles = pagy Article.where.not(status: Article::VALID_STATUES[2]).order(created_at: :desc), items: 5
     else
-      @articles = Article.where(status: Article::VALID_STATUES[0]).order(created_at: :desc)
+      @pagy, @articles = pagy Article.where(status: Article::VALID_STATUES[0]).order(created_at: :desc), items: 5
     end
-    @archaved_articles = Article.where(status: Article::VALID_STATUES[1]).order(created_at: :desc)
   end
 
   def show
     @comment = @article.comments.build
 
     if user_signed_in?
-      @comments = @article.comments.where.not(status: Article::VALID_STATUES[2]).order(created_at: :asc) 
+      @pagy, @comments = pagy @article.comments.where.not(status: Article::VALID_STATUES[2]).order(created_at: :asc), items: 5
     else
-      @comments = @article.comments.where(status: Article::VALID_STATUES[0]).order(created_at: :desc)
+      @pagy, @comments = pagy @article.comments.where(status: Article::VALID_STATUES[0]).order(created_at: :desc), items: 5
     end
   end
 
