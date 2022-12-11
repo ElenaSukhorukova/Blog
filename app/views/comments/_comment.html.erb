@@ -1,19 +1,18 @@
-<section>
+<%= tag.article class: 'line my-2', id: dom_id(comment)  do %>
   <p>
     <small>
-      <%= attribute_model(comment, :user) %></i> 
       <span class='bold'>
-        <%= comment.user.username.split(' ').map(&:capitalize!).join(' ') %>
+        <%= attribute_model(comment, :user) %></i> 
       </span> 
+        <%= comment.user.username.split(' ').map(&:capitalize).join(' ') %>,
       <time class='style-date' datetime="<%= comment.formatted_created_at %>">
         <%= comment.formatted_created_at %>
       </time>
     </small>
   </p>
-  <p><%= comment.body %></*p>
-            
+  <p><%= simple_format comment.body %></p>        
   <% if user_signed_in? && comment.user == current_user %>
-    <div class="btn-group mt-2" role="group">
+    <div class="btn-group my-2" role="group">
       <%= link_to t('link.edit', model: i18n_model_name(comment).downcase), 
         edit_comment_path(comment), class: 'btn btn-outline-success me-2 btn-sm' %>
       <%= button_to t('button.destroy', model: i18n_model_name(comment).downcase), 
@@ -21,5 +20,4 @@
         :onclick => "return confirm('Are you sure?')", :remote => true %>
     </div>
   <% end %>
-</section>
-        
+<% end %>
