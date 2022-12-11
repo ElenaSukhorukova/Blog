@@ -8,7 +8,12 @@
     <%= link_to t('link.new', model: i18n_model_name(@articles).downcase), 
       new_user_article_path(current_user), class: 'btn btn-outline-info me-2 mt-3' if current_user%>
   </p>
+  <div class='my-2'>
+    <%== pagy_bootstrap_nav @pagy if @pagy.pages > 1 %>
+  </div>
+
   <% if @articles.try(:any?) %>
+
     <% @articles.each do |article| %>
       <article class='mt-5'>
         <div class='container'>
@@ -17,11 +22,11 @@
             <p class='my-2'>
               <i><%= attribute_model(article, :user) %>:</i> 
               <span class='bold'>
-                <%= article.user.username.split(' ').map(&:capitalize!).join(' ') %>
+                <%= article.user.username.split(' ').map(&:capitalize).join(' ') %>
               </span>
             </p>
             <p class='my-2'>
-              <%= article.content %>
+              <%= truncate strip_tags(article.content), length: 100, omission: '... (continued)' %>
             </p>
             <span class='style-date'>
               <time datetime="<%= article.formatted_created_at %>">
@@ -44,3 +49,6 @@
     <% end %>
   <% end %>
 </section>
+<div class='my-2'>
+  <%== pagy_bootstrap_nav @pagy %>
+</div>

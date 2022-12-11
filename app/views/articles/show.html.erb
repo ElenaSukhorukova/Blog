@@ -10,11 +10,11 @@
       <p class='my-2'>
         <i><%= attribute_model(@article, :user) %> </i> 
         <span class='bold'>
-          <%= @article.user.username.split(' ').map(&:capitalize!).join(' ') %>
+          <%= @article.user.username.split(' ').map(&:capitalize).join(' ') %>
         </span>
       </p>
       <p>
-        <%= @article.content %>
+        <%= sanitize @article.content %>
       </p>
       <span class='style-date'>
         <time datetime="<%= @article.formatted_created_at %>">
@@ -31,15 +31,21 @@
       <% end %>
     </div>
     <section>
-      <% if @comments.try(:any?) %>
-        <h3 class='md-4 mt-5'><%= i18n_model_name(@comments, count: 2) %></h3>
-        <%= render partial: 'comments/comment', collection: @comments %>
-      <% end %>
       <% if user_signed_in? %>
         <div class='col-sm-5 mt-5'>
           <%= render partial: 'comments/form', locals: { model: [@article, @comment], method: :post, 
             url: article_comments_path(@article), submit: t('button.new') } %>
         </div>
+      <% end %>
+      <% if @comments.try(:any?) %>
+        <h3 class='md-4 mt-5'><%= i18n_model_name(@comments, count: 2) %></h3>
+          <div class='my-2'>
+            <%== pagy_bootstrap_nav @pagy if @pagy.pages > 1 %>
+          </div>
+        <%= render @comments %>
+          <div class='my-2'>
+            <%== pagy_bootstrap_nav @pagy if @pagy.pages > 1 %>
+          </div>
       <% end %>
     </section>
   </div>
