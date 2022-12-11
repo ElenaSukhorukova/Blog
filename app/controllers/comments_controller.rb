@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  include ActionView::RecordIdentifier
   before_action :authenticate_user!
   before_action :define_variables!, only: %i[create]
   before_action :define_comment!, except: %i[create]
@@ -8,7 +9,7 @@ class CommentsController < ApplicationController
     @comment.user = @user
 
     if @comment.save
-      redirect_to commentable_path(@comment), 
+      redirect_to commentable_path(@comment, anchor: dom_id(@answer.id)), 
         success: I18n.t('flash.new', model: i18n_model_name(@comment).downcase)
     else
       redirect_to commentable_path(@comment), 
