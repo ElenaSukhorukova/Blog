@@ -2,40 +2,15 @@
 .bold {
   font-weight: bold;
 }
-
-// style data article
-.style-date { 
-  font-size: 75%; 
-  color: #999
+.contacts {
+	line-height: 15px;
 }
 
-// set footer
-* {
-	margin: 0;
-	padding: 0;
-}
-html,
-body {
-	height: 100%;
+.text-black {
+	color: rgb(0, 0, 0);
 }
 
-.wrapper {
-	display: flex;
-	flex-direction: column;
-	min-height: 100%;
-}
-.content {
-	flex: 1 0 auto;
-}
-.footer {
-	flex: 0 0 auto;
-}
-// set footer end 
-
-.text-beige {
-	color: rgb(231, 231, 201);
-}
-
-.line {
-	border-bottom: 1px dotted #999;
+.text-gray {
+	color: rgb(70, 69, 69) !important;
+	font-weight: bold !important;
 }
