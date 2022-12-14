@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
     @comment.user = @user
 
     if @comment.save
-      redirect_to commentable_path(@comment, anchor: dom_id(@answer.id)), 
+      redirect_to commentable_path(@comment, anchor: dom_id(@comment)), 
         success: I18n.t('flash.new', model: i18n_model_name(@comment).downcase)
     else
       redirect_to commentable_path(@comment), 
@@ -51,7 +51,7 @@ class CommentsController < ApplicationController
     end
 
     def commentable_path(comment)
-      "/#{comment.commentable_type.downcase.pluralize}/#{comment.commentable_id}"
+      return article_path(comment.commentable, anchor: dom_id(comment)) if comment.commentable_type == 'Article'
     end
     helper_method :commentable_path
     
