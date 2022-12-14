@@ -1,0 +1,7 @@
+<section class="blurb">
+	<h2><%= t('page.about_title') %></h2>
+		<p><%= truncate strip_tags(t('page.about_content')), length: 150, omission: '... (continued)' %></p>
+		<ul class="actions">
+			<li><%= link_to t('page.about_title'), static_pages_about_path, class: "button" %></li>
+		</ul>
+</section>
