@@ -9,6 +9,10 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "custom", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "main", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "ie9", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "ie8", "data-turbo-track": "reload" %>
+
     <%= javascript_importmap_tags %>
     
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
@@ -16,10 +20,10 @@
   </head>
 
   <body>
-    <div class='wrapper'>
+    <div id='wrapper'>
       <%= yield :main_menu %>
       
-      <main class='container mt-3 content'>
+      <main id="main" >
         <% flash.each do |type, msg| %>    
           <!-- Change flash messages of devise to bootstrap format -->
           <% case type %>
@@ -34,7 +38,12 @@
         <%= yield %>
 
       </main>
-        <%= render 'layouts/footer' %>
+      <section id="sidebar">
+        <%= render 'shared/intro' %>
+        <%= render 'shared/sidebar' if current_user %>
+        <%= render 'shared/about' %>
+        <%= render 'shared/footer' %>
+      </section>
     </div>
   </body>
 </html>
