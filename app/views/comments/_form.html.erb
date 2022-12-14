@@ -3,6 +3,8 @@
     placeholder: attribute_model(f.object, :body), input_html: { class: 'mb-2' }  %>
   <%= f.input :status, collection: Comment::VALID_STATUES, as: :select, 
     selected: Comment::VALID_STATUES[0] %>
-  <%= f.button :submit, submit, class: "btn btn-primary mt-2 mb-2" %>
-  <%= render partial: 'shared/cancel_button', locals: { path: commentable_path(f.object) } if f.object.persisted? %>
+  <div class="mt-2 mb-2">
+    <%= f.button :submit, f.object.new_record? ? t('submit.new') : t('submit.edit') %>
+    <%= render partial: 'shared/cancel_button', locals: { path: commentable_path(f.object) } if f.object.persisted? %>
+  </div>
 <% end %>

@@ -1,8 +1,5 @@
 <section>
-  <% provide :page_title, t('page.edit', model: i18n_model_name(@comment).downcase) %>
-  <% currently_at %>
-  <h1 class='md-4'><%= t('page.edit', model: i18n_model_name(@comment).downcase) %></h1>
-  <div class='col-sm-5'>
-    <%= render partial: 'form', locals: { model: @comment, method: :put, submit: t('button.edit') } %>
-  </div>
+  <%= turbo_frame_tag dom_id(@comment) do %>
+    <%= render partial: 'form', locals: { model: @comment, method: :put } %>
+  <% end %>
 </section>
