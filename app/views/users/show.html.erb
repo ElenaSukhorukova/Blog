@@ -1,0 +1,16 @@
+<article class="static">
+  <% provide :page_title, @user.username %>
+  <% currently_at %>
+  <header>
+    <div class="title">
+      <h3><%= t('page.profile.title', username: @user.username) %></h3>
+    </div>
+	</header>
+  <p><%= t('page.profile.authorship', username: @user.username, count: @user_articles.count) << ' ' << i18n_model_name(Article.new, count: @user_articles.count).downcase %></p>
+</article>
+<% if @user_articles.try(:any?) %>
+  <%= render partial: 'articles/main_article', collection: @user_articles, as: :article %>
+  <%== pagination(@main_pagy) %>
+<% end %>
+
+
