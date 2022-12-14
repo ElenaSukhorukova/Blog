@@ -4,20 +4,18 @@ class ArticlesController < ApplicationController
   before_action :define_article!, except: %i[new create index]
 
   def index
-    if user_signed_in?
-      @pagy, @articles = pagy Article.where.not(status: Article::VALID_STATUES[2]).order(created_at: :desc), items: 5
-    else
-      @pagy, @articles = pagy Article.where(status: Article::VALID_STATUES[0]).order(created_at: :desc), items: 5
-    end
   end
 
   def show
+    @article = @article.decorate
     @comment = @article.comments.build
 
     if user_signed_in?
-      @pagy, @comments = pagy @article.comments.where.not(status: Article::VALID_STATUES[2]).order(created_at: :asc), items: 5
+      @pagy, @comments = pagy @article.comments.pablic_private, items: 5
+      @comments =  @comments.map(&:decorate)
     else
-      @pagy, @comments = pagy @article.comments.where(status: Article::VALID_STATUES[0]).order(created_at: :desc), items: 5
+      @pagy, @comments = pagy @article.comments.pablic, items: 5
+      @comments =  @comments.map(&:decorate)
     end
   end
 
@@ -29,7 +27,7 @@ class ArticlesController < ApplicationController
     @article = @user.articles.build(article_params)
 
     if @article.save
-      redirect_to articles_path, 
+      redirect_to articleb_path(@article), 
         success: I18n.t('flash.new', model: i18n_model_name(@article).downcase)
     else
       render :new, status: :unprocessable_entity
@@ -56,7 +54,7 @@ class ArticlesController < ApplicationController
   end
 
   private
-
+    
     def define_user!
       @user = User.find(params[:user_id]) if user_signed_in?
     end
