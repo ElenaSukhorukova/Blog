@@ -1,6 +1,10 @@
 module ApplicationHelper
   include Pagy::Frontend
 
+  def pagination(obj)
+    pagy_bootstrap_nav(obj) if obj.pages > 1
+  end
+
   def i18n_model_name(model, count: 1)
     model.model_name.human(count: count)
   end
@@ -20,7 +24,8 @@ module ApplicationHelper
 
   def nav_tab(title, url, options = {})
     current_page = options.delete :current_page
-    css_text = current_page == title ? 'text-beige' : 'text-white'
+    css_text = current_page == title ? 'text-gray' : 'text-black'
+    
     options[:class] = options[:class] ? (options[:class] + ' ' + css_text) : 
                                         css_text
     
