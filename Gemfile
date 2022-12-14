@@ -54,7 +54,7 @@ gem 'devise-i18n'
 gem 'simple_form'
 gem "jsbundling-rails", "~> 1.0"
 gem "cssbundling-rails", "~> 1.1"
-
+gem 'draper', '~> 4.0'
 gem 'pagy', '~> 5.10', '>= 5.10.1'
 
 group :development, :test do
