@@ -1,52 +1,57 @@
-<article class='mt-2'>
+<article class="post">
   <% provide :page_title, @article.title %>
   <% currently_at %>
 
-  <div class='container'>
-    <%= render partial: 'shared/go_back_button', locals: { path: articles_path } %>
-
-    <h1 class='md-4'><%= @article.title %></h1>
-    <section>
-      <p class='my-2'>
-        <i><%= attribute_model(@article, :user) %> </i> 
-        <span class='bold'>
-          <%= @article.user.username.split(' ').map(&:capitalize).join(' ') %>
-        </span>
-      </p>
-      <p>
-        <%= sanitize @article.content %>
-      </p>
-      <span class='style-date'>
-        <time datetime="<%= @article.formatted_created_at %>">
-          <%= @article.formatted_created_at %>
-        </time>
-      <span>
-    </section>
-    <div class="btn-group mt-2" role="group">
-      <% if user_signed_in? && @article.user == current_user %>
-        <%= link_to t('link.edit', model: i18n_model_name(@article).downcase), 
-          edit_article_path(@article), class: 'btn btn-outline-success me-2' %>
-        <%= button_to t('button.destroy', model: i18n_model_name(@article).downcase), article_path(@article), 
-          method: :delete, class: "btn btn-outline-danger", :onclick => "return confirm('Are you sure?')", :remote => true %>
-      <% end %>
-    </div>
-    <section>
-      <% if user_signed_in? %>
-        <div class='col-sm-5 mt-5'>
-          <%= render partial: 'comments/form', locals: { model: [@article, @comment], method: :post, 
-            url: article_comments_path(@article), submit: t('button.new') } %>
+	<header>
+		<div class="title">
+			<h2><%= @article.title %></h2>
+		</div>    
+  	<div class="meta">
+      <time class="published" datetime="<%= @article.formatted_created_at %>">
+        <%= @article.formatted_created_at %>
+      </time>
+      <%= link_to @article.user.username, user_path(@article.user), class: "author" %>
+		</div>
+	</header>
+  <p><%= simple_format(@article.content) %></p>
+	<footer>
+		<ul class="actions">
+      <li>
+        <div class="btn-group mt-2" role="group">
+          <%= render partial: 'shared/go_back_button', locals: { path: articles_path } %>
+          <% if user_signed_in? && @article.user == current_user %>
+            <%= link_to t('link.edit', model: i18n_model_name(@article).downcase), 
+              edit_article_path(@article), class: 'button' %>
+            <%= button_to t('button.destroy', model: i18n_model_name(@article).downcase), article_path(@article), 
+              method: :delete, class: "button", :onclick => "return confirm('Are you sure?')", :remote => true %>
+          <% end %>
         </div>
-      <% end %>
-      <% if @comments.try(:any?) %>
-        <h3 class='md-4 mt-5'><%= i18n_model_name(@comments, count: 2) %></h3>
-          <div class='my-2'>
-            <%== pagy_bootstrap_nav @pagy if @pagy.pages > 1 %>
-          </div>
-        <%= render @comments %>
-          <div class='my-2'>
-            <%== pagy_bootstrap_nav @pagy if @pagy.pages > 1 %>
-          </div>
-      <% end %>
-    </section>
-  </div>
+      </li>
+		</ul>
+    <ul class="stats">
+      <li>
+        <% visible = user_signed_in? ? @article.comments.pablic_private : @article.comments.pablic %>
+        <%= link_to(article_path(@article, anchor: anchor(@article)), 
+            title: t('link.show', model: i18n_model_name(Comment.new, count: 2).downcase)) do %>
+          <i class="bi bi-chat"><%= count_comments(@article) %></i>
+        <% end %>
+      </li>
+    </ul>
+	</footer>
+</article>
+<article class="comments">
+  <% if user_signed_in? %>
+    <%= render partial: 'comments/form', locals: { model: [@article, @comment], method: :post, 
+        url: article_comments_path(@article) } %>
+  <% end %>
+  <% if @comments.try(:any?) %>
+    <h2><%= i18n_model_name(Comment.new, count: 2) %></h2>
+    <div class='my-2'>
+      <%== pagination(@pagy) if @pagy.pages > 1 %>
+    </div>
+    <%= render @comments %>
+    <div class='my-2'>
+      <%== pagination(@pagy) if @pagy.pages > 1 %>
+    </div>
+  <% end %>
 </article>

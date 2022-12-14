@@ -1,0 +1,8 @@
+<article class="mini-post">
+	<header>
+		<h3><%= link_to article.title, article_path(article) %></h3>
+		<time class="published" datetime="<%= article.formatted_created_at %>">
+			<%= article.formatted_created_at %>
+    </time>
+	</header>
+</article>

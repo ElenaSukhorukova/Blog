@@ -1,0 +1,33 @@
+<article class="post">
+  <header>
+    <div class="title">
+    	<h2><%= link_to article.title, article_path(article) %></h2>
+		</div>
+		<div class="meta">
+			<time class="published" datetime="<%= article.formatted_created_at %>">
+        <%= article.formatted_created_at %>
+      </time>
+      <%= link_to article.user.username, user_path(article.user), class: "author" %>
+		</div>
+	</header>
+  <p><%= truncate strip_tags(article.content), length: 150, omission: '... (continued)' %></p>
+  <footer>
+		<ul class="actions">
+      <li>
+        <%= link_to t('link.show', model: i18n_model_name(article).downcase), 
+            article_path(article), class: "button big" %>
+      </li>
+		</ul>
+		<ul class="stats">
+      <li>
+        
+        <%= link_to(article_path(article,  anchor: anchor(article)), 
+            title: t('link.show', model: i18n_model_name(Comment.new, count: 2).downcase)) do %>
+          <i class="bi bi-chat"><%= count_comments(article) %></i>
+        <% end %>
+      </li>
+		</ul>
+	</footer>
+</article>
+
+
