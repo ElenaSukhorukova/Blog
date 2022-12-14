@@ -51,23 +51,31 @@ en:
     about_content: 'Leo, in in malesuada ornare faucibus. Dolor quis, ultricies. Lectus justo quam, et lorem vitae velit non sed quam, sit ornare malesuada molestie odio. Quis, habitasse lectus imperdiet eleifend quis, arcu amet, tempus elit. Malesuada non sapien interdum arcu ornare eget dapibus luctus id consectetur cras accumsan amet ipsum mollis et molestie consectetur consectetur sed in lorem lorem dolor et ipsum mattis risus odio. Libero, luctus est. Odio. Justo sit odio. Non ipsum amet, orci, morbi sodales urna morbi arcu cras sit integer accumsan sed accumsan tortor, interdum sit libero, elit. Lacinia ex. Morbi consectetur lorem et accumsan non sit eget sit tempus pellentesque consectetur consectetur in ornare vulputate odio. Venenatis lectus vulputate lorem habitasse sit sit mattis tempus dictumst. Imperdiet tortor, eleifend eleifend in sed integer mauris sed urna elit. Vel molestie integer nulla nec vestibulum in amet et. Vitae cursus lectus ipsum interdum non eget faucibus. Ornare molestie amet, efficitur vitae in mollis interdum vel et lorem morbi quis, sed sodales lorem dui et nulla faucibus. In nulla non libero, consectetur libero, odio. Dapibus nec et risus et nisi venenatis in et. Consectetur lorem velit molestie et. Risus vulputate amet morbi hac nec ornare quam, eleifend morbi augu.'
     contacts: 
       contacts: 'Contacts'
+      company: 'Company name:'
       address: 
-        attr_address: 'Address: '
+        attr_address: 'Address:'
         address: 'Avenu street, 5, 26'
-        attr_post_code: "Post code: "
+        attr_post_code: "Post code:"
         post_code: '123145'
         attr_city: 'City: '
         city: 'Boston'
-        attr_phone: 'Phone number'
+        attr_phone: 'Phone number:'
         phone: '+955-555-66-77'
-        attr_email: 'Email'
+        attr_email: 'Email:'
         email: 'mail@mail.com'
-    telegram: "&#9990; @elenkasu"
+    telegram: "Telegram &#9990;"
+    article:
+      popular: 'Popular articles'
+      archived: 'Archived articles'
+    profile: 
+      title: 'Profile of %{username}'
+      authorship: '%{username} has %{count}'
   nav:
     sign_up: 'Sign up'
     sign_in: 'Log in'
     sign_out: 'Sign out'
-  button:
+    enter: 'Enter'
+  submit:
     new: 'Send'
     edit: 'Edit'
     destroy: "Destroy the %{model}"
