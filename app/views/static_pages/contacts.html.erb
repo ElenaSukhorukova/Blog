@@ -1,11 +1,19 @@
-<% provide :page_title, t('page.contacts.contacts') %>
-<% currently_at t('link.contact') %>
+<article class="static">
+  <% provide :page_title, t('page.contacts.contacts') %>
+  <% currently_at t('link.contact') %>
 
-<h1 class='md-2'><%= t('page.contacts.contacts') %></h1>
-<section class='card px-2'>
-  <div class='card-body' itemscope itemtype="http://schema.org/Organization">   
-    <p class='bold fs-5'><span itemprop="name"><%= t('page.site_name') %></span></p>
-    <div class='card-text' itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+    <header>
+      <div class="title">
+        <h2><%= t('page.contacts.contacts') %>  
+        <h2>
+      </div>
+    </header>
+  <div itemscope itemtype="http://schema.org/Organization" class='contacts'>   
+    <p>
+      <span class='bold'><%= t('page.contacts.company') %></span> 
+      <span itemprop="name"><%= t('page.site_name') %></span>
+    </p>
+    <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
       <p>
         <span class='bold'><%= t('page.contacts.address.attr_address') %></span> 
         <span itemprop="streetAddress"><%= t('page.contacts.address.address') %></span>
@@ -27,5 +35,5 @@
       <span class='bold'><%= t('page.contacts.address.attr_email') %></span> 
       <span itemprop="email"><%= t('page.contacts.address.email') %></span>
     </p>
-  </div>
-</section>
+    </div>
+</article>
