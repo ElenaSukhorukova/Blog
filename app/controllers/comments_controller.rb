@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CommentsController < ApplicationController
   include ActionView::RecordIdentifier
   before_action :authenticate_user!
@@ -15,7 +17,7 @@ class CommentsController < ApplicationController
                   success: I18n.t('flash.new', model: i18n_model_name(@comment).downcase)
     else
       redirect_to commentable_path(@comment),
-                  danger: "#{@comment.errors.full_messages.each { |error| error.capitalize }.join(' ')}"
+                  danger: @comment.errors.full_messages.each(&:capitalize).join(' ').to_s
     end
   end
 

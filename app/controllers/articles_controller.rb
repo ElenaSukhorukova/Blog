@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ArticlesController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
   before_action :define_user!, only: %i[new create]
@@ -11,11 +13,10 @@ class ArticlesController < ApplicationController
 
     if user_signed_in?
       @pagy, @comments = pagy @article.comments.pablic_private, items: 5
-      @comments = @comments.map(&:decorate)
     else
       @pagy, @comments = pagy @article.comments.pablic, items: 5
-      @comments = @comments.map(&:decorate)
     end
+    @comments = @comments.map(&:decorate)
   end
 
   def new

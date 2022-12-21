@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module Visible
   extend ActiveSupport::Concern
 
-  VALID_STATUES = %w[public private archived]
+  VALID_STATUES = %w[public private archived].freeze
 
   included do
     validates :status, inclusion: { in: VALID_STATUES }

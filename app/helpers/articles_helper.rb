@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ArticlesHelper
   def count_comments(article)
     return article.comments.where.not(status: Article::VALID_STATUES[2]).count if current_user

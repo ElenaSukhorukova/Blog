@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module MostArticles
   extend ActiveSupport::Concern
   def most_commented(old_articles)

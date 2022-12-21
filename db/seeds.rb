@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 10.times do |index|
   name = Faker::Name.name
   email = "test#{index}@test.com"
