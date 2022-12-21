@@ -19,8 +19,7 @@
       </li>
 		</ul>
 		<ul class="stats">
-      <li>
-        
+      <li>    
         <%= link_to(article_path(article,  anchor: anchor(article)), 
             title: t('link.show', model: i18n_model_name(Comment.new, count: 2).downcase)) do %>
           <i class="bi bi-chat"><%= count_comments(article) %></i>

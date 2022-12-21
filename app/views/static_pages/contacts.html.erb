@@ -2,12 +2,11 @@
   <% provide :page_title, t('page.contacts.contacts') %>
   <% currently_at t('link.contact') %>
 
-    <header>
-      <div class="title">
-        <h2><%= t('page.contacts.contacts') %>  
-        <h2>
-      </div>
-    </header>
+  <header>
+    <div class="title">
+      <h2><%= t('page.contacts.contacts') %><h2>
+    </div>
+  </header>
   <div itemscope itemtype="http://schema.org/Organization" class='contacts'>   
     <p>
       <span class='bold'><%= t('page.contacts.company') %></span> 
@@ -35,5 +34,5 @@
       <span class='bold'><%= t('page.contacts.address.attr_email') %></span> 
       <span itemprop="email"><%= t('page.contacts.address.email') %></span>
     </p>
-    </div>
+  </div>
 </article>

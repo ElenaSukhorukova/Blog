@@ -1,12 +1,10 @@
 10.times do |index|
-  name = Faker::Name.name 
+  name = Faker::Name.name
   email = "test#{index}@test.com"
   password = 'test123'
 
-  unless User.find_by email: email
-    User.create(username: name, email: email, password: password)
-  end
-end 
+  User.create(username: name, email: email, password: password) unless User.find_by email: email
+end
 
 20.times do
   user_id = User.ids.sample
@@ -23,6 +21,7 @@ Article.all.collect do |article|
     body = Faker::Lorem.paragraph(sentence_count: 5, supplemental: true, random_sentences_to_add: 4)
     status = Comment::VALID_STATUES.sample
 
-    Comment.create user_id: user_id, body: body, status: status, commentable_type: article.class.to_s, commentable_id: article.id
+    Comment.create user_id: user_id, body: body, status: status, commentable_type: article.class.to_s,
+                   commentable_id: article.id
   end
 end

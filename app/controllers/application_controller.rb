@@ -10,22 +10,22 @@ class ApplicationController < ActionController::Base
 
   protected
 
-    def configure_permitted_parameters
-      devise_parameter_sanitizer.permit(:sign_up, keys: [:username])
-    end
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:username])
+  end
 
-    def define_articles!
-      if user_signed_in?
-        @main_pagy, @articles = pagy Article.pablic_private, items: 4, page_param: :main_pagy  
-        @comentered_articles = most_commented(@articles)
-        @comentered_articles = @comentered_articles.map(&:decorate)
-        @articles = @articles.decorate
-  
-        @sidebar_pagy, @archived_articles = pagy Article.pablic, items: 4, page_param: :sidebar_pagy
-        @archived_articles = @archived_articles.decorate
-      else
-        @main_pagy, @articles = pagy Article.archived, items: 4, page_param: :main_pagy
-        @articles = @articles.decorate
-      end
+  def define_articles!
+    if user_signed_in?
+      @main_pagy, @articles = pagy Article.pablic_private, items: 4, page_param: :main_pagy
+      @comentered_articles = most_commented(@articles)
+      @comentered_articles = @comentered_articles.map(&:decorate)
+      @articles = @articles.decorate
+
+      @sidebar_pagy, @archived_articles = pagy Article.pablic, items: 4, page_param: :sidebar_pagy
+      @archived_articles = @archived_articles.decorate
+    else
+      @main_pagy, @articles = pagy Article.archived, items: 4, page_param: :main_pagy
+      @articles = @articles.decorate
     end
+  end
 end

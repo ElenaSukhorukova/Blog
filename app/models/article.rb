@@ -10,9 +10,7 @@ class Article < ApplicationRecord
 
   belongs_to :user
 
-  def comments_count
-    self.comments.count
-  end
+  delegate :count, to: :comments, prefix: true
 
   scope :pablic_private, -> { where.not(status: Article::VALID_STATUES[2]).order(created_at: :desc) }
   scope :pablic, -> { where(status: Article::VALID_STATUES[0]).order(created_at: :desc) }

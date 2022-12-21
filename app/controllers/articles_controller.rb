@@ -3,8 +3,7 @@ class ArticlesController < ApplicationController
   before_action :define_user!, only: %i[new create]
   before_action :define_article!, except: %i[new create index]
 
-  def index
-  end
+  def index; end
 
   def show
     @article = @article.decorate
@@ -12,10 +11,10 @@ class ArticlesController < ApplicationController
 
     if user_signed_in?
       @pagy, @comments = pagy @article.comments.pablic_private, items: 5
-      @comments =  @comments.map(&:decorate)
+      @comments = @comments.map(&:decorate)
     else
       @pagy, @comments = pagy @article.comments.pablic, items: 5
-      @comments =  @comments.map(&:decorate)
+      @comments = @comments.map(&:decorate)
     end
   end
 
@@ -23,47 +22,46 @@ class ArticlesController < ApplicationController
     @article = @user.articles.build
   end
 
+  def edit; end
+
   def create
     @article = @user.articles.build(article_params)
 
     if @article.save
-      redirect_to articleb_path(@article), 
-        success: I18n.t('flash.new', model: i18n_model_name(@article).downcase)
+      redirect_to articleb_path(@article),
+                  success: I18n.t('flash.new', model: i18n_model_name(@article).downcase)
     else
       render :new, status: :unprocessable_entity
     end
   end
 
-  def edit
-  end
-
   def update
     if @article.update(article_params)
-      redirect_to article_path(@article), 
-        success: I18n.t('flash.update', model: i18n_model_name(@article).downcase)
+      redirect_to article_path(@article),
+                  success: I18n.t('flash.update', model: i18n_model_name(@article).downcase)
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
-    if @article.destroy
-      redirect_to articles_path, 
-        success: I18n.t('flash.destroy', model: i18n_model_name(@article).downcase)
-    end
+    return unless @article.destroy
+
+    redirect_to articles_path,
+                success: I18n.t('flash.destroy', model: i18n_model_name(@article).downcase)
   end
 
   private
-    
-    def define_user!
-      @user = User.find(params[:user_id]) if user_signed_in?
-    end
 
-    def define_article!
-      @article = Article.find(params[:id])
-    end
+  def define_user!
+    @user = User.find(params[:user_id]) if user_signed_in?
+  end
 
-    def article_params
-      params.require(:article).permit(:title, :content, :status)
-    end
+  def define_article!
+    @article = Article.find(params[:id])
+  end
+
+  def article_params
+    params.require(:article).permit(:title, :content, :status)
+  end
 end
