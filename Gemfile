@@ -63,6 +63,9 @@ group :development, :test do
   # gem for ENV
   gem "figaro"
   gem 'faker', '~> 3'
+  gem 'rubocop', '~> 1.40', require: false
+  gem 'rubocop-rails', '~> 2.17', require: false
+  gem 'rubocop-performance', '~> 1.15', require: false
 end
 
 group :development do
