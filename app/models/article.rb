@@ -7,8 +7,12 @@ class Article < ApplicationRecord
   validates :content, presence: true, length: { minimum: 2 }
 
   has_many :comments, as: :commentable, dependent: :destroy
-  has_many :pablic_private, -> { pablic_private }, class_name: 'Comment'
-  has_many :pablic, -> { pablic }, class_name: 'Comment'
+  has_many(:pablic_private, -> { pablic_private },
+           inverse_of: :comment,
+           dependent: :destroy)
+  has_many(:pablic, -> { pablic },
+           inverse_of: :comment,
+           dependent: :destroy)
 
   belongs_to :user
 

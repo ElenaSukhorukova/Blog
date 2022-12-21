@@ -17,17 +17,19 @@ class ApplicationController < ActionController::Base
   end
 
   def define_articles!
-    if user_signed_in?
-      @main_pagy, @articles = pagy Article.pablic_private, items: 4, page_param: :main_pagy
-      @comentered_articles = most_commented(@articles)
-      @comentered_articles = @comentered_articles.map(&:decorate)
-      @articles = @articles.decorate
+    return articles_for_signed_user if user_signed_in?
 
-      @sidebar_pagy, @archived_articles = pagy Article.pablic, items: 4, page_param: :sidebar_pagy
-      @archived_articles = @archived_articles.decorate
-    else
-      @main_pagy, @articles = pagy Article.archived, items: 4, page_param: :main_pagy
-      @articles = @articles.decorate
-    end
+    @main_pagy, @articles = pagy Article.archived, items: 4, page_param: :main_pagy
+    @articles = @articles.decorate
+  end
+
+  def articles_for_signed_user
+    @main_pagy, @articles = pagy Article.pablic_private, items: 4, page_param: :main_pagy
+    @comentered_articles = most_commented(@articles)
+    @comentered_articles = @comentered_articles.map(&:decorate)
+    @articles = @articles.decorate
+
+    @sidebar_pagy, @archived_articles = pagy Article.pablic, items: 4, page_param: :sidebar_pagy
+    @archived_articles = @archived_articles.decorate
   end
 end

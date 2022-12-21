@@ -9,8 +9,7 @@ class CommentsController < ApplicationController
   def edit; end
 
   def create
-    @comment = @commentable.comments.build(comment_params)
-    @comment.user = @user
+    build_comment
 
     if @comment.save
       redirect_to commentable_path(@comment, anchor: dom_id(@comment)),
@@ -55,6 +54,11 @@ class CommentsController < ApplicationController
     return article_path(comment.commentable, anchor: dom_id(comment)) if comment.commentable_type == 'Article'
   end
   helper_method :commentable_path
+
+  def build_comment
+    @comment = @commentable.comments.build comment_params
+    @comment.user = @user
+  end
 
   def comment_params
     params.require(:comment).permit(:body, :status)
