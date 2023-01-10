@@ -1,11 +1,11 @@
 <article class="static">
-  <% provide :page_title, t('page.about_title') %>
-  <% currently_at t('page.about') %>
+  <% provide :page_title, t('.title') %>
+  <% currently_at t('menu.about') %>
 
   <header>
     <div class="title">
-      <h2><%= t('page.about_title') %></h2>
+      <h2><%= t('.title') %></h2>
     </div>
 	</header>
-  <p><%= simple_format t('page.about_content') %></p>
+  <p><%= simple_format t('.content') %></p>
 </article>

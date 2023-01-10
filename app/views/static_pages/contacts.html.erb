@@ -1,38 +1,44 @@
 <article class="static">
-  <% provide :page_title, t('page.contacts.contacts') %>
-  <% currently_at t('link.contact') %>
+  <% provide :page_title, t('.title') %>
+  <% currently_at t('menu.contact') %>
 
   <header>
     <div class="title">
-      <h2><%= t('page.contacts.contacts') %><h2>
+      <h2><%= t('.title') %></h2>
     </div>
   </header>
-  <div itemscope itemtype="http://schema.org/Organization" class='contacts'>   
-    <p>
-      <span class='bold'><%= t('page.contacts.company') %></span> 
-      <span itemprop="name"><%= t('page.site_name') %></span>
-    </p>
-    <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+  <div class='row row-cols-2'>
+    
+    <div itemscope itemtype="http://schema.org/Organization" class='contacts col'>   
       <p>
-        <span class='bold'><%= t('page.contacts.address.attr_address') %></span> 
-        <span itemprop="streetAddress"><%= t('page.contacts.address.address') %></span>
+        <span class='bold'><%= t('.dates.company') %></span> 
+        <span itemprop="name"><%= t('site_name') %></span>
+      </p>
+      <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+        <p>
+          <span class='bold'><%= t('.dates.address.attr_address') %></span> 
+          <span itemprop="streetAddress"><%= t('.dates.address.address') %></span>
+        </p>
+        <p>
+          <span class='bold'><%= t('.dates.address.attr_post_code') %></span> 
+          <span itemprop="postalCode"><%= t('page.contacts.address.post_code') %></span>
+        </p>
+        <p>
+          <span class='bold'><%= t('.dates.address.attr_city') %></span> 
+          <span itemprop="addressLocality"><%= t('page.contacts.address.city') %></span>
+        </p>
+      </div>
+      <p>
+        <span class='bold'><%= t('.dates.address.attr_phone') %></span> 
+        <span itemprop="telephone"><%= t('.dates.address.phone') %></span>
       </p>
       <p>
-        <span class='bold'><%= t('page.contacts.address.attr_post_code') %></span> 
-        <span itemprop="postalCode"><%= t('page.contacts.address.post_code') %></span>
-      </p>
-      <p>
-        <span class='bold'><%= t('page.contacts.address.attr_city') %></span> 
-        <span itemprop="addressLocality"><%= t('page.contacts.address.city') %></span>
+        <span class='bold'><%= t('.dates.address.attr_email') %></span> 
+        <span itemprop="email"><%= t('.dates.address.email') %></span>
       </p>
     </div>
-    <p>
-      <span class='bold'><%= t('page.contacts.address.attr_phone') %></span> 
-      <span itemprop="telephone"><%= t('page.contacts.address.phone') %></span>
-    </p>
-    <p>
-      <span class='bold'><%= t('page.contacts.address.attr_email') %></span> 
-      <span itemprop="email"><%= t('page.contacts.address.email') %></span>
-    </p>
+    <div class='col'>
+      <%= image_tag("https://www.orangesmile.com/common/img_city_maps_560/boston-map-0.jpg", size: "400x300", alt: t('.find_us')) %>
+    </div>
   </div>
 </article>
