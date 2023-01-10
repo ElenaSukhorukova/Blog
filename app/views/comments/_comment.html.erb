@@ -13,7 +13,7 @@
       <div class="btn-group my-2" role="group">
         <%= link_to t('link.edit', model: i18n_model_name(comment).downcase), 
           edit_comment_path(comment), class: 'button me-2' %>
-        <%= button_to t('button.destroy', model: i18n_model_name(comment).downcase), 
+        <%= button_to t('submit.destroy', model: i18n_model_name(comment).downcase), 
           comment_path(comment), method: :delete, class: 'button me-2', 
           :onclick => "return confirm('Are you sure?')", :remote => true %>
       </div>
