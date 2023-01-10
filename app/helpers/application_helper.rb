@@ -16,7 +16,7 @@ module ApplicationHelper
   end
 
   def full_title(page_title = '')
-    base_title = t('page.site_name')
+    base_title = t('site_name')
     page_title ? "#{page_title} | #{base_title}" : base_title.to_s
   end
 
@@ -26,7 +26,7 @@ module ApplicationHelper
 
   def nav_tab(title, url, options = {})
     current_page = options.delete :current_page
-    css_text = current_page == title ? 'text-gray' : 'text-black'
+    css_text = current_page == title ? 'text-blob' : ' '
 
     options[:class] = if options[:class]
                         "#{options[:class]} #{css_text}"
@@ -35,5 +35,8 @@ module ApplicationHelper
                       end
 
     link_to title, url, options
+  end
+  def params_plus(additional_params)
+    params.to_unsafe_h.merge(additional_params)
   end
 end
