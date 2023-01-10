@@ -9,12 +9,11 @@ class ArticlesController < ApplicationController
 
   def show
     @article = @article.decorate
-    @comment = @article.comments.build
 
     if user_signed_in?
-      @pagy, @comments = pagy @article.comments.pablic_private, items: 5
+      @pagy, @comments = pagy @article.comments.includes(:user).pablic_private, items: 5
     else
-      @pagy, @comments = pagy @article.comments.pablic, items: 5
+      @pagy, @comments = pagy @article.comments.includes(:user).pablic, items: 5
     end
     @comments = @comments.map(&:decorate)
   end
