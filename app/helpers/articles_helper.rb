@@ -8,7 +8,8 @@ module ArticlesHelper
   end
 
   def anchor(article)
+    return unless article.comments.try(:any?)
     visible = user_signed_in? ? article.comments.pablic_private : article.comments.pablic
-    dom_id(visible.first)
+    dom_id(visible.first) unless visible.blank?
   end
 end
