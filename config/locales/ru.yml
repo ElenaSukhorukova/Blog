@@ -1,0 +1,241 @@
+ru:
+  site_name: Блог
+  en: Английский
+  ru: Русский
+  activerecord:
+    models:
+      article:
+        one: Статья
+        few: Статьи
+        many: Статьи
+        other: Статьи
+      comment:
+        one: Комментарий
+        few: Комментарии
+        many: Комментарии
+        other: Комментарии
+      user:
+        one: Пользователь
+        few: Пользователи
+        many: Пользователи
+        other: Пользователи
+    attributes:
+      article:
+        title: Заголовок
+        content: Текст
+        user: Автор
+        status: Статус
+      comment:
+        body: Комментарий
+        user: Автор
+        status: Статус
+      user:
+        confirmation_sent_at: Дата отправки подтверждения
+        confirmation_token: Токен подтверждения
+        confirmed_at: Дата подтверждения
+        created_at: Дата создания
+        current_password: Текущий пароль
+        current_sign_in_at: Дата текущего входа
+        current_sign_in_ip: IP текущего входа
+        email: Email
+        encrypted_password: Зашифрованный пароль
+        failed_attempts: Неудачные попытки
+        last_sign_in_at: Дата последнего входа
+        last_sign_in_ip: IP последнего входа
+        locked_at: Дата блокировки
+        password: Пароль
+        password_confirmation: Подтверждение пароля
+        remember_created_at: Дата создания запоминания
+        remember_me: Запомнить меня
+        reset_password_sent_at: Дата отправки сброса пароля
+        reset_password_token: Токен сброса пароля
+        sign_in_count: Количество входов
+        unconfirmed_email: Неподтвержденный email
+        unlock_token: Токен разблокировки
+        updated_at: Дата обновления
+  footer:
+    telegram: "Telegram &#9990;"
+  static_pages:
+    about: 
+      title: О нас
+      content: Leo, in in malesuada ornare faucibus. Dolor quis, ultricies. Lectus justo quam, et lorem vitae velit non sed quam, sit ornare malesuada molestie odio. Quis, habitasse lectus imperdiet eleifend quis, arcu amet, tempus elit. Malesuada non sapien interdum arcu ornare eget dapibus luctus id consectetur cras accumsan amet ipsum mollis et molestie consectetur consectetur sed in lorem lorem dolor et ipsum mattis risus odio. Libero, luctus est. Odio. Justo sit odio. Non ipsum amet, orci, morbi sodales urna morbi arcu cras sit integer accumsan sed accumsan tortor, interdum sit libero, elit. Lacinia ex. Morbi consectetur lorem et accumsan non sit eget sit tempus pellentesque consectetur consectetur in ornare vulputate odio. Venenatis lectus vulputate lorem habitasse sit sit mattis tempus dictumst. Imperdiet tortor, eleifend eleifend in sed integer mauris sed urna elit. Vel molestie integer nulla nec vestibulum in amet et. Vitae cursus lectus ipsum interdum non eget faucibus. Ornare molestie amet, efficitur vitae in mollis interdum vel et lorem morbi quis, sed sodales lorem dui et nulla faucibus. In nulla non libero, consectetur libero, odio. Dapibus nec et risus et nisi venenatis in et. Consectetur lorem velit molestie et. Risus vulputate amet morbi hac nec ornare quam, eleifend morbi augu.'
+      link: Перейти на страницу "О нас"
+    contacts: 
+      title: Контакты
+      dates:
+        company: Имя компании
+        address: 
+          attr_address: Адрес
+          address: Avenu street, 5, 26
+          attr_post_code: Почтовый интекс
+          post_code: 123145
+          attr_city: City
+          city: Boston
+          attr_phone: Номер телефона
+          phone: +955-555-66-77
+          attr_email: Email
+          email: mail@mail.com
+      find_us: Как нас найти
+  articles:
+    edit:
+      title: Редактировать статью
+    update:
+      success: Статья была успешно обновлена
+    new:
+      title: Новая статья
+    create:
+      success: Статья была успешно создана
+    destroy:
+      success: Статья была успешно удалена
+  users:
+    show:
+      title: 'Профиль %{username}'
+      authorship: '%{username} имеет %{count}'
+  comments:
+    edit:
+      success: Комментарий был успешно обновлен
+    new:
+      success: Комментарий был успешно создан
+    destroy:
+      success: Комментарий был успешно удален
+  menu:
+    sign_up: Регистрация
+    sign_in: Вход
+    sign_out: Выход
+    enter: Вход
+    about: О нас
+    contact: Контакты
+    new_article: Новая статья
+  submit:
+    new: Отправить
+    edit: Редактировать
+    destroy: "Удалить %{model}"
+    sign_in: Войти
+    go_back: "&larr; вернуться назад"
+  link:
+    new: 'Новый %{model}'
+    edit: "Редактировать %{model}"
+    show: "Показать %{model}"
+  shared:
+    title_popular: Популярные статьи
+    title_archived: Архивные статьи
+  devise:
+    confirmations:
+      confirmed: Ваш адрес эл. почты успешно подтвержден.
+      new:
+        resend_confirmation_instructions: Выслать повторно письмо с активацией
+      send_instructions: В течение нескольких минут вы получите письмо с инструкциями по подтверждению адреса эл. почты.
+      send_paranoid_instructions: Если ваш адрес эл. почты есть в системе, то в течение нескольких минут вы получите письмо с инструкциями по его подтверждению.
+    failure:
+      already_authenticated: Вы уже вошли в систему.
+      inactive: Ваша учетная запись еще не активирована.
+      invalid: 'Неправильный %{authentication_keys} или пароль.'
+      last_attempt: У вас осталась последняя попытка ввода пароля до блокировки учетной записи.
+      locked: Ваша учетная запись заблокирована.
+      not_found_in_database: 'Неправильный %{authentication_keys} или пароль.'
+      timeout: Ваш сеанс закончился. Пожалуйста, войдите в систему снова.
+      unauthenticated: Вам необходимо войти в систему или зарегистрироваться.
+      unconfirmed: Вы должны подтвердить вашу учетную запись.
+    mailer:
+      confirmation_instructions:
+        action: Активировать
+        greeting: 'Здравствуйте, %{recipient}!'
+        instruction: 'Вы можете активировать свою учетную запись, нажав ссылку снизу:'
+        subject: Инструкции по подтверждению учетной записи
+      email_changed:
+        greeting: 'Здравствуйте, %{recipient}!'
+        message: 'Мы пытаемся связаться с вами, что бы сообщить, что ваш email был изменен на %{email}.'
+        message_unconfirmed:
+        subject: Email изменен
+      password_change:
+        greeting: 'Приветствуем, %{recipient}!'
+        message: Мы пытаемся связаться с вами, что бы сообщить, что ваш пароль был изменен.
+        subject: Пароль изменен
+      reset_password_instructions:
+        action: Изменить пароль
+        greeting: 'Здравствуйте, %{recipient}!'
+        instruction: 'Вы (или кто-то еще) запросили изменение пароля. Для изменения пароля нажмите ссылку ниже:'
+        instruction_2: Если вы не запрашивали изменение пароля - проигнорируйте это сообщение
+        instruction_3: Ваш пароль не изменится пока вы не нажмете на ссылку и не введете новый.
+        subject: Инструкции по восстановлению пароля
+      unlock_instructions:
+        action: Разблокировать учетную запись
+        greeting: 'Здравствуйте, %{recipient}!'
+        instruction: 'Нажмите ссылку для активации учетной записи:'
+        message: Ваша учетная запись была заблокирована в связи с превышением лимита неудачных попыток входа.
+        subject: Инструкции по разблокировке учетной записи
+    omniauth_callbacks:
+      failure: 'Вы не можете войти в систему с учетной записью из %{kind}, т.к. "%{reason}".'
+      success: 'Вход в систему выполнен с учетной записью из %{kind}.'
+    passwords:
+      edit:
+        change_my_password: Изменить мой пароль
+        change_your_password: Изменить пароль
+        confirm_new_password: Повторите новый пароль
+        new_password: Новый пароль
+      new:
+        forgot_your_password: Забыли пароль?
+        send_me_reset_password_instructions: Выслать новый пароль
+      no_token: Доступ к этой странице возможен только по ссылке из письма о восстановлении пароля. Если вы пришли по такой ссылке, пожалуйста, убедитесь, что Вы скопировали всю ссылку целиком.
+      send_instructions: В течение нескольких минут вы получите письмо с инструкциями по восстановлению пароля.
+      send_paranoid_instructions: Если ваш адрес эл. почты есть в системе, то в течение нескольких минут вы получите письмо с инструкциями по восстановлению пароля.
+      updated: Ваш пароль изменен. Теперь вы вошли в систему.
+      updated_not_active: Ваш пароль изменен.
+    registrations:
+      destroyed: До свидания! Ваша учетная запись удалена. Надеемся снова увидеть вас.
+      edit:
+        are_you_sure: Вы уверены?
+        cancel_my_account: Удалить учетную запись
+        currently_waiting_confirmation_for_email: 'Ожидается подтверждение адреса E-mail: %{email}'
+        leave_blank_if_you_don_t_want_to_change_it: оставьте поле пустым, если не хотите его менять
+        title: 'Редактировать %{resource}'
+        unhappy: Разочарованы?
+        update: Обновить
+        we_need_your_current_password_to_confirm_your_changes: введите текущий пароль для подтверждения изменений
+      new:
+        sign_up: Регистрация
+      signed_up: Добро пожаловать! Вы успешно зарегистрировались.
+      signed_up_but_inactive: Вы успешно зарегистрированы. Однако, вы не можете войти в систему, потому что ваша учетная запись не активирована.
+      signed_up_but_locked: Вы успешно зарегистрированы. Однако, вы не можете войти в систему, потому что ваша учетная запись заблокирована.
+      signed_up_but_unconfirmed: Письмо со ссылкой для подтверждения было отправлено на ваш адрес эл. почты. Пожалуйста, перейдите по ссылке, чтобы подтвердить учетную запись.
+      update_needs_confirmation: Вы успешно обновили данные учетной записи, но необходимо подтвердить новый адрес эл. почты. Пожалуйста, проверьте почтовый ящик и перейдите по ссылке, чтобы закончить процедуру проверки нового адреса эл. почты.
+      updated: Ваша учетная запись изменена.
+      updated_but_not_signed_in: Ваш аккаунт успешно обновлен, но так как пароль был изменен, необходимо выполнить вход еще раз
+    sessions:
+      already_signed_out: Выход из системы уже выполнен.
+      new:
+        sign_in: Войти
+      signed_in: Вход в систему выполнен.
+      signed_out: Выход из системы выполнен.
+    shared:
+      links:
+        back: Назад
+        didn_t_receive_confirmation_instructions: Не получили подтверждение?
+        didn_t_receive_unlock_instructions: Не получили код разблокировки?
+        forgot_your_password: Забыли пароль?
+        sign_in: Войти
+        sign_in_with_provider: 'Войти с помощью: %{provider}'
+        sign_up: Регистрация
+      minimum_password_length:
+        few: "(минимум %{count} знака)"
+        many: "(минимум %{count} знаков)"
+        one: "(минимум %{count} знак)"
+        other: "(минимум %{count} знаков)"
+    unlocks:
+      new:
+        resend_unlock_instructions: Выслать подтверждение заново
+      send_instructions: В течение нескольких минут вы получите письмо с инструкциями по разблокировке учетной записи.
+      send_paranoid_instructions: Если ваша учетная запись существует, то в течение нескольких минут вы получите письмо с инструкциями по ее разблокировке.
+      unlocked: Ваша учетная запись разблокирована. Теперь вы можете войти в систему.
+    errors:
+      messages:
+        already_confirmed: уже подтверждён. Пожалуйста, попробуйте войти в систему
+        confirmation_period_expired: должен быть подтвержден в течение %{period}, пожалуйста, повторите запрос на подтверждение
+        expired: устарела. Пожалуйста, запросите новую
+        not_found: не найден
+        not_locked: не заблокирован
+        not_saved:
+          few: "%{resource}: сохранение не удалось из-за %{count} ошибок:"
+          many: "%{resource}: сохранение не удалось из-за %{count} ошибок:"
+          one: "%{resource}: сохранение не удалось из-за %{count} ошибки:"
+          other: "%{resource}: сохранение не удалось из-за %{count} ошибки:"
