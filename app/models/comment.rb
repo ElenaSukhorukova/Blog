@@ -2,7 +2,6 @@
 
 class Comment < ApplicationRecord
   include Visible
-  include TimeShow
 
   validates :body, presence: true, length: { maximum: 4000 }
 
