@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   include ErrorHandling
   include ApplicationHelper
   include MostArticles
+  include Internationalization
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :define_articles!
 
