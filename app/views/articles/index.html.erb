@@ -1,6 +1,6 @@
 <section>
-  <% provide :page_title, i18n_model_name(Article.new, count: 2) %>
-  <% currently_at t('page.site_name') %>
+  <% provide :page_title, i18n_model_name(Article.new, count: 10) %>
+  <% currently_at t('site_name') %>
   
   <% if @articles.try(:any?) %>
     <%= render partial: 'main_article', collection: @articles, as: :article %>
