@@ -1,45 +1,74 @@
 <%= provide :main_menu do %>
   <header id="header">
-    <h1><%= nav_tab t('page.site_name'), root_path, current_page: current_page %></h1>
+    <h1><%= nav_tab t('site_name'), root_path, current_page: current_page %></h1>
     <nav class="links">
       <ul>   
         <li>
-          <%= nav_tab t('page.about'), static_pages_about_path, current_page: current_page %>
+          <%= nav_tab t('menu.about'), static_pages_about_path, current_page: current_page %>
         </li>
         <li>
-          <%= nav_tab t('link.contact'), static_pages_contacts_path, current_page: current_page %>
+          <%= nav_tab t('menu.contact'), static_pages_contacts_path, current_page: current_page %>
         </li>
-          <li>
-            <%= nav_tab t('link.new', model: i18n_model_name(Article.new).downcase), new_user_article_path(current_user), 
-                current_page: current_page if user_signed_in? %>
-          </li>
-      </ul>
-    </nav>
-    <nav class='me-4'>
-      <ul>
-        <li class="dropdown me-4">
+        <li>
+          <%= nav_tab t('menu.new_article', model: i18n_model_name(Article.new).downcase), 
+              new_user_article_path(current_user), 
+              current_page: current_page if user_signed_in? %>
+        </li>
+        <li class="dropdown">
+          <%= link_to '#', class: 'dropdown-toggle',
+              data: {'bs-toggle': 'dropdown'} do %>
+            <%= tag.div '', class: "flag #{I18n.locale}-flag mt-1" %>
+            <%= t I18n.locale %>
+          <% end %>
+          <ul class='dropdown-menu text-center'>
+            <% I18n.available_locales.each do |locale| %>
+              <li class='li_dropdown'>
+                <% if I18n.locale.to_s == locale %>
+                  <%= tag.span t(locale), class: 'dropdown-item'%>
+                <% else %>
+                  <%= link_to t(locale), url_for(params_plus(locale: locale)),
+                      class: 'dropdown-item' %>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        </li>
+        <li class="dropdown">
           <% if user_signed_in? %>
             <%= link_to current_user.username, '#', class: "dropdown-toggle",
                 data: {'bs-toggle': 'dropdown'} %>    
-            <ul class='dropdown-menu text-center'>
-              <li>
-                <%= button_to t('nav.sign_out'), sign_out_path, method: :delete, form: {turbolink: false}, 
+            <ul class='dropdown-menu'>
+              <li class='li_dropdown text-center'>
+                <%= button_to t('menu.sign_out'), sign_out_path, method: :delete, form: {turbolink: false}, 
                     :onclick => "return confirm('Are you sure?')", :remote => true, 
                     class: "dropdown-item" %>
               </li>
             </ul>
           <% else %>
-            <%= link_to t('nav.enter'), '#', class: "dropdown-toggle",
+            <%= link_to t('menu.enter'), '#', class: "dropdown-toggle",
                 data: {'bs-toggle': 'dropdown'} %>
-            <ul class='dropdown-menu text-center'>
-              <li>
-                <%= nav_tab t('nav.sign_in'), sign_in_path, class: "dropdown-item"  %>
+            <ul class='dropdown-menu'>
+              <li class='li_dropdown text-center'>
+                <%= nav_tab t('menu.sign_in'), sign_in_path, class: "dropdown-item"  %>
               </li>
-              <li>
-                <%= nav_tab t('nav.sign_up'), sign_up_path, class: "dropdown-item"  %>
+              <li class='li_dropdown text-center'>
+                <%= nav_tab t('menu.sign_up'), sign_up_path, class: "dropdown-item" %>
               </li>
             </ul>
           <% end %>
+        </li>
+      </ul>
+    </nav>
+    <nav class="main">
+      <ul>
+        <li class="search">
+          <a class="fa-search" href="#search">Search</a>
+          <form id="search" method="get" action="#">
+            <input type="text" name="query" placeholder="Search" />
+          </form>
+        </li>
+        <li class="menu">
+          <a class="fa-bars" href="#menu">Menu</a>
         </li>
       </ul>
     </nav>

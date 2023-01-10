@@ -1,6 +1,6 @@
 <section>
 	<% if @comentered_articles.try(:any?)%>
-		<h3><%= t('page.article.popular') %></h3>
+		<h3><%= t('shared.title_popular') %></h3>
 		<div class="mini-posts">
 			<%= render partial: 'articles/commentered_article', collection: @comentered_articles, as: :article %>
 		</div>
@@ -8,7 +8,7 @@
 </section>
 <section>
 	<% if @archived_articles.try(:any?) %>
-		<h3><%= t('page.article.archived') %></h3>
+		<h3><%= t('shared.title_archived') %></h3>
 		<ul class="posts">
 			<%= render partial: 'articles/archived_article', collection: @archived_articles, as: :article %>
 		</ul>
