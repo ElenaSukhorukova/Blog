@@ -78,6 +78,9 @@ GEM
     bootsnap (1.15.0)
       msgpack (~> 1.2)
     builder (3.2.4)
+    bullet (7.0.7)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.11)
     capybara (3.38.0)
       addressable
       matrix
@@ -103,6 +106,7 @@ GEM
       warden (~> 1.2.3)
     devise-i18n (1.10.2)
       devise (>= 4.8.0)
+    diff-lcs (1.5.0)
     draper (4.0.2)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
@@ -111,6 +115,11 @@ GEM
       request_store (>= 1.0)
       ruby2_keywords
     erubi (1.12.0)
+    factory_bot (6.2.1)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.2.0)
+      factory_bot (~> 6.2.0)
+      railties (>= 5.0.0)
     faker (3.1.0)
       i18n (>= 1.8.11, < 2)
     ffi (1.15.5)
@@ -213,6 +222,19 @@ GEM
       actionpack (>= 5.0)
       railties (>= 5.0)
     rexml (3.2.5)
+    rspec (3.12.0)
+      rspec-core (~> 3.12.0)
+      rspec-expectations (~> 3.12.0)
+      rspec-mocks (~> 3.12.0)
+    rspec-core (3.12.0)
+      rspec-support (~> 3.12.0)
+    rspec-expectations (3.12.2)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.12.0)
+    rspec-mocks (3.12.2)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.12.0)
+    rspec-support (3.12.0)
     rubocop (1.42.0)
       json (~> 2.3)
       parallel (~> 1.10)
@@ -247,6 +269,8 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    shoulda-matchers (5.3.0)
+      activesupport (>= 5.2.0)
     simple_form (5.1.0)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
@@ -269,6 +293,7 @@ GEM
     tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.4.2)
+    uniform_notifier (1.16.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.0)
@@ -293,12 +318,14 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap
+  bullet
   capybara
   cssbundling-rails (~> 1.1)
   debug
   devise
   devise-i18n
   draper (~> 4.0)
+  factory_bot_rails
   faker (~> 3)
   figaro
   importmap-rails
@@ -310,11 +337,13 @@ DEPENDENCIES
   rails (~> 7.0.4)
   rails-i18n (~> 7.0.0)
   redis (~> 4.0)
+  rspec (~> 3.5)
   rubocop (~> 1.40)
   rubocop-performance (~> 1.15)
   rubocop-rails (~> 2.17)
   sassc-rails
   selenium-webdriver
+  shoulda-matchers
   simple_form
   sprockets-rails
   stimulus-rails
