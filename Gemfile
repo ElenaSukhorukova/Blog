@@ -64,6 +64,9 @@ group :development, :test do
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   # gem for ENV
   gem 'faker', '~> 3'
+  gem 'rubocop', '~> 1.40', require: false
+  gem 'rubocop-performance', '~> 1.15', require: false
+  gem 'rubocop-rails', '~> 2.17', require: false
 end
 
 group :development do
@@ -77,9 +80,7 @@ group :development do
   # gem "spring"
   gem 'bullet', '~> 7.0.7'
   gem 'figaro'
-  gem 'rubocop', '~> 1.40', require: false
-  gem 'rubocop-performance', '~> 1.15', require: false
-  gem 'rubocop-rails', '~> 2.17', require: false
+
 end
 
 group :test do
@@ -88,6 +89,7 @@ group :test do
   gem 'selenium-webdriver'
   gem 'webdrivers'
   gem 'rspec-rails', '~> 6.0.1'
-  gem 'shoulda-matchers'
+  gem 'shoulda-matchers', '~> 5.3.0'
   gem "factory_bot_rails", '~> 6.2.0'
+  gem 'rubocop-rspec', '~> 2.16.0', require: false
 end
