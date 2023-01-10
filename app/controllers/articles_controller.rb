@@ -29,8 +29,8 @@ class ArticlesController < ApplicationController
     @article = @user.articles.build(article_params)
 
     if @article.save
-      redirect_to articleb_path(@article),
-                  success: I18n.t('flash.new', model: i18n_model_name(@article).downcase)
+      redirect_to article_path(@article),
+                  success: t('.success')
     else
       render :new, status: :unprocessable_entity
     end
@@ -39,7 +39,7 @@ class ArticlesController < ApplicationController
   def update
     if @article.update(article_params)
       redirect_to article_path(@article),
-                  success: I18n.t('flash.update', model: i18n_model_name(@article).downcase)
+                  success: t('.success')
     else
       render :edit, status: :unprocessable_entity
     end
@@ -49,7 +49,7 @@ class ArticlesController < ApplicationController
     return unless @article.destroy
 
     redirect_to articles_path,
-                success: I18n.t('flash.destroy', model: i18n_model_name(@article).downcase)
+                success: t('.success')
   end
 
   private

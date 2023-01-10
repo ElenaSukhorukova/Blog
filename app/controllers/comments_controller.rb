@@ -3,27 +3,30 @@
 class CommentsController < ApplicationController
   include ActionView::RecordIdentifier
   before_action :authenticate_user!
-  before_action :define_variables!, only: %i[create]
+  before_action :define_user!, only: %i[create]
   before_action :define_comment!, except: %i[create]
+  before_action :set_commentable!, only: %i[create]
 
   def edit; end
 
   def create
-    build_comment
+    @comment = @commentable.comments.build comment_params
 
-    if @comment.save
-      redirect_to commentable_path(@comment, anchor: dom_id(@comment)),
-                  success: I18n.t('flash.new', model: i18n_model_name(@comment).downcase)
-    else
-      redirect_to commentable_path(@comment),
-                  danger: @comment.errors.full_messages.each(&:capitalize).join(' ').to_s
-    end
+    return redirect_to polymorphic_path(@comment.commentable_type, 
+                                        @comment, anchor: dom_id(@comment)),
+          success: t('.success') if @comment.save
+
+    session[:comment_errors] = @comment.errors if @comment.errors.any?
+    @pagy, @comments = pagy @commentable.comments.includes(:user).order(created_at: :desc), items: 3
+    @commentable = @commentable.decorate
+    @comments = @comments.decorate
+    render("#{@commentable.object.class.to_s.pluralize.downcase}/show")
   end
 
   def update
     if @comment.update(comment_params)
       redirect_to commentable_path(@comment),
-                  success: I18n.t('flash.update', model: i18n_model_name(@comment).downcase)
+                  success: t('.success')
     else
       render :edit, status: :unprocessable_entity
     end
@@ -33,34 +36,28 @@ class CommentsController < ApplicationController
     return unless @comment.destroy
 
     redirect_to commentable_path(@comment),
-                success: I18n.t('flash.destroy', model: i18n_model_name(@comment).downcase)
+                success: t('.success')
   end
 
   private
 
-  def define_variables!
-    @user = User.find_by(id: current_user.id)
+  def define_user!
+    @user = User.find_by id: current_user.id 
+  end
 
-    # set commentable
-    resource, id = request.path.split('/')[1, 2]
-    @commentable = resource.singularize.classify.constantize.find(id)
+  def set_commentable!
+    klass = [Article].detect { |c| params["#{c.name.underscore}_id"] }
+    # debugger
+    raise ActiveRecord::RecordNotFound if klass.blank?
+
+    @commentable = klass.find(params["#{klass.name.underscore}_id"])
   end
 
   def define_comment!
-    @comment = Comment.find(params[:id])
-  end
-
-  def commentable_path(comment)
-    return article_path(comment.commentable, anchor: dom_id(comment)) if comment.commentable_type == 'Article'
-  end
-  helper_method :commentable_path
-
-  def build_comment
-    @comment = @commentable.comments.build comment_params
-    @comment.user = @user
+    @comment = Comment.find params[:id]
   end
 
   def comment_params
-    params.require(:comment).permit(:body, :status)
+    params.require(:comment).permit(:body, :status).merge(user: current_user)
   end
 end
