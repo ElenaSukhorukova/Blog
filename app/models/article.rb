@@ -7,6 +7,8 @@ class Article < ApplicationRecord
   validates :content, presence: true, length: { minimum: 2 }
 
   has_many :comments, as: :commentable, dependent: :destroy
+  has_many_attached :images
+
   has_many(:pablic_private, -> { pablic_private },
            inverse_of: :comment,
            dependent: :destroy)
